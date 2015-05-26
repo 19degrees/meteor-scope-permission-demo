@@ -24,7 +24,14 @@ ScopePermissionDemo = function(aString) {
     
   }
 
+
+  _best_practice_private_function = function() {
+    console.log('this is the best way to make a private function accessible by prototype functions');
+  }
   
+  _best_practice_getter_for_private_variable = function() {
+    return _private_variable;
+  }
 
   self.instance_function_by_self = function() {
     console.log('this is a public instance function created by "self"');
@@ -126,6 +133,10 @@ ScopePermissionDemo.prototype.instance_function_by_prototype = function() {
     console.error('calling _private_function_by_unvar_function failed');
     console.error(e);
   }
+}
+
+ScopePermissionDemo.prototype.best_practice_public_function = function() {
+  console.log('access to _private variable by calling a private getter:',_best_practice_getter_for_private_variable());
 }
 
 ScopePermissionDemo.static_function = function() {
