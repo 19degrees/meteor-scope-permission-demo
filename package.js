@@ -2,7 +2,7 @@ Package.describe({
   name: '19degrees:scope-permission-demo',
   version: '1.0.0',
   // Brief, one-line summary of the package.
-  summary: 'An in-depth look into scoping and permissions of Meteor. Testing when to use var, when to use self / this, and when to use prototype as well as how to ensure a property is public / private.',
+  summary: 'An in-depth look into scoping and permissions of Meteor.',
   // URL to the Git repository containing the source code for this package.
   git: 'https://github.com/19degrees/meteor-scope-permission-demo',
   // By default, Meteor will default to using README.md for documentation.
