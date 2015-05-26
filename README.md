@@ -33,5 +33,5 @@ It can only be access by functions (both public and private) defined in the same
 
 ### Best Practice
 Create private variables using var inside Object declaration like `_private`.
-Access private variables via getter and setter like `_best_practice_private_function`.
+Access private variables via getter and setter like `_best_practice_getter_for_private_variable` and `_best_practice_setter_for_private_variable`.
 Create pubilc functions with `prototype` like `best_practice_public_function`.

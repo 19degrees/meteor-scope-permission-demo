@@ -33,6 +33,10 @@ ScopePermissionDemo = function(aString) {
     return _private_variable;
   }
 
+  _best_practice_setter_for_private_variable = function(new_private) {
+    _private_variable = new_private;
+  }
+
   self.instance_function_by_self = function() {
     console.log('this is a public instance function created by "self"');
 
@@ -136,7 +140,11 @@ ScopePermissionDemo.prototype.instance_function_by_prototype = function() {
 }
 
 ScopePermissionDemo.prototype.best_practice_public_function = function() {
-  console.log('access to _private variable by calling a private getter:',_best_practice_getter_for_private_variable());
+  var current_private = _best_practice_getter_for_private_variable();
+  console.log('access to _private variable by calling a private getter:',current_private);
+  console.log('updating _private to new vaule with _best_practice_setter_for_private_variable...');
+  _best_practice_setter_for_private_variable(current_private+" updated!");
+  console.log('_private:',_best_practice_getter_for_private_variable());
 }
 
 ScopePermissionDemo.static_function = function() {
