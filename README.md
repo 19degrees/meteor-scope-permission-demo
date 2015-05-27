@@ -15,7 +15,7 @@ y = new ScopePermissionDemo('this is y');
 ##### ScopePermissionDemo.instance_function_by_self
 A public instance function created by self.function_name (self.instance_function_by_self) inside the object declaration. It has access to all the _private variables and functions defined (scope controlled by using `var`) inside the object.
 ##### ScopePermissionDemo.instance_function_by_prototype
-A public instance function created by ScopePermissionDemo.prototype (ScopePermissionDemo.prototype.instance_function_by_prototype). It do not have access to any of the _private variables defined inside the object and require globally defined private functions (defined by *not* using `var` in Object declaration) to access the _private variables.
+A public instance function created by ScopePermissionDemo.prototype (ScopePermissionDemo.prototype.instance_function_by_prototype). It do not have access to any of the _private variables defined inside the object (with `var`) and require other publicly available functions like `self.instance_function_by_self` to access these variables. When prototype is used, one can consider exposing the varibles in question as `self.public_variable` unless extra setting / getting logic is required.
 
 ## Private Instance Functions
 ##### ScopePermissionDemo._private_function_by_unvar_function
@@ -31,7 +31,19 @@ var _private_function_by_var_function = function() {...}
 ```
 It can only be access by functions (both public and private) defined in the same Object declaration but not by public functions created using *prototypes*.
 
-### Best Practice
-Create private variables using var inside Object declaration like `_private`.
-Access private variables via getter and setter like `_best_practice_getter_for_private_variable` and `_best_practice_setter_for_private_variable`.
-Create pubilc functions with `prototype` like `best_practice_public_function`.
+### Best Practice using Prototypes
+- Create private variables using `var` inside Object declaration like `_private`.
+- Expose varibles like `self.public_variable`, use `_` in front to "denote it as private" (still accessible publicly) or access private variables via public getters and setters like `self._best_practice_getter_for_private_variable` and `self._best_practice_setter_for_private_variable`.
+- Create pubilc functions with `prototype` like `best_practice_public_function_prototype`.
+
+### Best Practice using self.public_function
+- Create private variables using `var` inside Object declaration like `_private`.
+- Create pubilc functions with `self` like `self.best_practice_public_function_self`.
+
+### Prototype vs SELF / THIS
+- SELF / THIS duplicate functions in each instance, prototype allow the same function to only be defined once and shared.
+- SELF / THIS allow private variables where as prototype can only access public varibles
+- Real access permission vs memory efficency
+- As JavaScript is lexically scoped, you can simulate this on a per-object level by using the constructor function as a closure over your 'private members' and defining your methods in the constructor, but this won't work for methods defined in the constructor's prototype property.
+- http://thecodeship.com/web-development/methods-within-constructor-vs-prototype-in-javascript/
+- http://stackoverflow.com/questions/6784927/how-to-acces-javascript-object-variables-in-prototype-function
